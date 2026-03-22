@@ -497,7 +497,7 @@
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">IA</span>
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Análisis Financiero</span>
         </div>
-        <button class="btn-demo" onclick="openVideo('Análisis financiero con Claude Code.mp4','Análisis Financiero con Claude Code')">
+        <button class="btn-demo" onclick="openVideo('1CMAUDs3yxY0FKhmESsyFTIyi-nST4u8G','Análisis Financiero con Claude Code')">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Ver Demo
         </button>
@@ -521,7 +521,7 @@
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Claude</span>
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">IA</span>
         </div>
-        <button class="btn-demo" onclick="openVideo('Análisis financiero con Claude en excel.mp4','Análisis Financiero con Claude en Excel')">
+        <button class="btn-demo" onclick="openVideo('1fPAa28Gp7km7hh8a16eAkO1519C39Zef','Análisis Financiero con Claude en Excel')">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Ver Demo
         </button>
@@ -545,7 +545,7 @@
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">RPA</span>
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Automatización</span>
         </div>
-        <button class="btn-demo" onclick="openVideo('Automatización de analisis de reporte financiero con n8n.mp4','Automatización de Análisis de Reporte Financiero con n8n')">
+        <button class="btn-demo" onclick="openVideo('1dWAyo_CUanqpre4u3H1v5LcTez1pHgyY','Automatización de Análisis de Reporte Financiero con n8n')">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Ver Demo
         </button>
@@ -569,7 +569,7 @@
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Claude</span>
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">IA Generativa</span>
         </div>
-        <button class="btn-demo" onclick="openVideo('Automatización de resumen financiero con UiPath y Claude.mp4','Automatización de Resumen Financiero con UiPath y Claude')">
+        <button class="btn-demo" onclick="openVideo('1uAf--D_BBPToQasSTZQQYDe81v61x2jc','Automatización de Resumen Financiero con UiPath y Claude')">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Ver Demo
         </button>
@@ -593,7 +593,7 @@
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">RPA</span>
           <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Valoración</span>
         </div>
-        <button class="btn-demo" onclick="openVideo('Explorar la valoracion de una accion con UiPath.mp4','Explorar la Valoración de una Acción con UiPath')">
+        <button class="btn-demo" onclick="openVideo('15nf6FJ6wpYXoOFQO2tKCVEJrM_TpMfhy','Explorar la Valoración de una Acción con UiPath')">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Ver Demo
         </button>
@@ -870,7 +870,7 @@
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
-    <video id="video-player" controls playsinline></video>
+    <iframe id="video-player" allowfullscreen allow="autoplay" style="width:100%;aspect-ratio:16/9;border:none;background:#000;display:block;max-height:70vh;"></iframe>
   </div>
 </div>
 
@@ -951,7 +951,7 @@
   }
 
   // ── PDF modal ────────────────────────────────────────
-  const PDF_BASE = '../../Portafolio/';
+  const PDF_BASE = '/public/';
 
   function openPDF(filename, title) {
     const encoded = encodeURIComponent(filename);
@@ -981,25 +981,18 @@
   });
 
   // ── Video modal ───────────────────────────────────────
-  const VIDEO_BASE = '../../Portafolio/';
-
-  function openVideo(filename, title) {
+  function openVideo(driveId, title) {
     const player = document.getElementById('video-player');
     const modal  = document.getElementById('video-modal');
-    // Encode only the filename to handle spaces and accented characters
-    const parts = filename.split('/');
-    const encoded = parts.map(p => encodeURIComponent(p)).join('/');
-    player.src = VIDEO_BASE + encoded;
+    player.src = 'https://drive.google.com/file/d/' + driveId + '/preview';
     document.getElementById('video-modal-title').textContent = title;
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    player.load();
   }
 
   function closeVideo() {
     const player = document.getElementById('video-player');
     const modal  = document.getElementById('video-modal');
-    player.pause();
     player.src = '';
     modal.classList.remove('open');
     document.body.style.overflow = '';
