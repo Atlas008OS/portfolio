@@ -1,8 +1,8 @@
 {
   "framework": null,
-  "buildCommand": null,
+  "buildCommand": "",
   "outputDirectory": ".",
-  "installCommand": null,
+  "installCommand": "",
   "rewrites": [
     { "source": "/corpfinance", "destination": "/corpfinance.html" }
   ]
