@@ -27,6 +27,7 @@ const projects = [
       "Interpretación contextual de cada indicador",
       "Interfaz responsive con tema oscuro profesional",
     ],
+    videoUrl: null,
   },
   {
     title: "Análisis Financiero con Claude Code",
@@ -41,6 +42,7 @@ const projects = [
       "Generación de reportes inteligentes",
       "Integración con Claude Code",
     ],
+    videoUrl: "https://drive.google.com/file/d/1CMAUDs3yxY0FKhmESsyFTIyi-nST4u8G/preview",
   },
   {
     title: "Análisis Financiero en Excel con Claude",
@@ -55,6 +57,7 @@ const projects = [
       "Análisis automatizado de datos financieros",
       "Generación de insights con IA",
     ],
+    videoUrl: "https://drive.google.com/file/d/1fPAa28Gp7km7hh8a16eAkO1519C39Zef/preview",
   },
   {
     title: "Automatización de Reporte Financiero con n8n",
@@ -69,6 +72,7 @@ const projects = [
       "Conexión de múltiples fuentes de datos",
       "Reportes financieros automáticos",
     ],
+    videoUrl: "https://drive.google.com/file/d/1dWAyo_CUanqpre4u3H1v5LcTez1pHgyY/preview",
   },
   {
     title: "Automatización de Resumen Financiero con UiPath y Claude",
@@ -83,6 +87,7 @@ const projects = [
       "Generación automática de resúmenes",
       "Integración UiPath + Claude AI",
     ],
+    videoUrl: "https://drive.google.com/file/d/1uAf--D_BBPToQasSTZQQYDe81v61x2jc/preview",
   },
   {
     title: "Valoración de Acciones con UiPath",
@@ -97,6 +102,7 @@ const projects = [
       "Valoración de acciones con RPA",
       "Exploración de casos de uso financiero",
     ],
+    videoUrl: "https://drive.google.com/file/d/15nf6FJ6wpYXoOFQO2tKCVEJrM_TpMfhy/preview",
   },
 ];
 
@@ -129,7 +135,7 @@ export default function Projects() {
 
         {/* Featured project */}
         <div className="mb-8">
-          <Card className="border-blue-500/20 bg-card/50 backdrop-blur-sm overflow-hidden">
+          <Card className="relative border-blue-500/20 bg-card/50 backdrop-blur-sm overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none" />
             <CardContent className="p-8">
               <div className="flex flex-col md:flex-row gap-8">
@@ -197,6 +203,16 @@ export default function Projects() {
                 key={project.title}
                 className="border-border bg-card/50 backdrop-blur-sm card-hover flex flex-col"
               >
+                {project.videoUrl && (
+                  <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+                    <iframe
+                      src={project.videoUrl}
+                      className="absolute inset-0 w-full h-full rounded-t-xl"
+                      allow="autoplay"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between gap-3 mb-3">
                     <div className={`p-2.5 rounded-xl ${colors.bg} border ${colors.border}`}>

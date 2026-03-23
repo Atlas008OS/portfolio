@@ -23,7 +23,7 @@ export default function Achievements() {
 
         {/* Hult Prize card */}
         <div className="max-w-2xl">
-          <Card className="border-yellow-500/20 bg-card/50 backdrop-blur-sm overflow-hidden">
+          <Card className="relative border-yellow-500/20 bg-card/50 backdrop-blur-sm overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent pointer-events-none" />
             <CardContent className="p-8">
               <div className="flex flex-col sm:flex-row gap-6 items-start">
