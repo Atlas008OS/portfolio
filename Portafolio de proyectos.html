@@ -180,6 +180,17 @@
     }
     #pdf-modal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
     #pdf-frame { flex: 1; width: 100%; border: none; background: #fff; }
+    /* Carrusel certificados */
+    .cert-card {
+      width: calc(33.333% - 16px);
+    }
+    @media (max-width: 1024px) {
+      .cert-card { width: calc(50% - 12px); }
+    }
+    @media (max-width: 640px) {
+      .cert-card { width: calc(100% - 0px); }
+    }
+
     .btn-cert {
       display: inline-flex; align-items: center; gap: 6px;
       margin-top: 12px; padding: 8px 16px; border-radius: 10px;
@@ -619,110 +630,126 @@
       <p class="text-slate-400 max-w-2xl text-lg">Certificaciones en las tecnologías que definen el futuro de las finanzas y los negocios.</p>
     </div>
 
-    <div class="reveal grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-      <!-- Claude 101 -->
-      <div class="card-hover rounded-2xl border border-slate-800 bg-[#0d1117] p-6 flex flex-col">
-        <div class="text-3xl mb-4">🤖</div>
-        <div class="flex items-center gap-1.5 text-xs font-semibold text-purple-400 mb-2">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Anthropic
-        </div>
-        <h3 class="font-semibold text-white mb-3 leading-snug">Claude 101</h3>
-        <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Certificación sobre los fundamentos de Claude: uso efectivo, prompting avanzado y aplicaciones de IA generativa en entornos profesionales.</p>
-        <div class="flex flex-wrap gap-1.5 mb-4">
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">IA</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Claude</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Prompting</span>
-        </div>
-        <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
-          <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Completado · 2026
-        </div>
-        <button class="btn-cert" onclick="openPDF('Claude 101.pdf','Claude 101 — Anthropic')">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Ver Certificado
+    <!-- Controles del carrusel -->
+    <div class="reveal flex items-center justify-between mb-4">
+      <div class="flex gap-2" id="cert-dots"></div>
+      <div class="flex gap-2">
+        <button id="cert-prev" onclick="certSlide(-1)" class="w-9 h-9 rounded-full border border-slate-700 bg-[#0d1117] text-slate-400 flex items-center justify-center transition hover:border-blue-500 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button id="cert-next" onclick="certSlide(1)" class="w-9 h-9 rounded-full border border-slate-700 bg-[#0d1117] text-slate-400 flex items-center justify-center transition hover:border-blue-500 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
+    </div>
 
-      <!-- Claude Code en Acción -->
-      <div class="card-hover rounded-2xl border border-purple-500/30 bg-[#0d1117] p-6 flex flex-col relative" style="box-shadow: 0 0 30px rgba(168,85,247,0.06);">
-        <div class="absolute top-3 right-3">
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-500/10 border border-purple-500/30 text-purple-400">Nuevo</span>
+    <!-- Track del carrusel -->
+    <div class="reveal overflow-hidden">
+      <div id="cert-track" class="flex gap-6 transition-transform duration-500 ease-in-out">
+
+        <!-- Claude 101 -->
+        <div class="cert-card card-hover rounded-2xl border border-slate-800 bg-[#0d1117] p-6 flex flex-col flex-shrink-0">
+          <div class="text-3xl mb-4">🤖</div>
+          <div class="flex items-center gap-1.5 text-xs font-semibold text-purple-400 mb-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Anthropic
+          </div>
+          <h3 class="font-semibold text-white mb-3 leading-snug">Claude 101</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Certificación sobre los fundamentos de Claude: uso efectivo, prompting avanzado y aplicaciones de IA generativa en entornos profesionales.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">IA</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Claude</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Prompting</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
+            <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completado · 2026
+          </div>
+          <button class="btn-cert" onclick="openPDF('Claude 101.pdf','Claude 101 — Anthropic')">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Ver Certificado
+          </button>
         </div>
-        <div class="text-3xl mb-4">💻</div>
-        <div class="flex items-center gap-1.5 text-xs font-semibold text-purple-400 mb-2">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Anthropic
+
+        <!-- Claude Code en Acción -->
+        <div class="cert-card card-hover rounded-2xl border border-purple-500/30 bg-[#0d1117] p-6 flex flex-col flex-shrink-0 relative" style="box-shadow: 0 0 30px rgba(168,85,247,0.06);">
+          <div class="absolute top-3 right-3">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-500/10 border border-purple-500/30 text-purple-400">Nuevo</span>
+          </div>
+          <div class="text-3xl mb-4">💻</div>
+          <div class="flex items-center gap-1.5 text-xs font-semibold text-purple-400 mb-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Anthropic
+          </div>
+          <h3 class="font-semibold text-white mb-3 leading-snug">Claude Code en Acción</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Certificado que acredita el uso práctico de Claude Code como herramienta de desarrollo asistido por IA, incluyendo automatización de tareas, generación de código y flujos de trabajo productivos.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">IA</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Claude Code</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Desarrollo</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
+            <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completado · 2026
+          </div>
+          <button class="btn-cert" onclick="openPDF('Claude Code en acción.pdf','Claude Code en Acción — Anthropic')">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Ver Certificado
+          </button>
         </div>
-        <h3 class="font-semibold text-white mb-3 leading-snug">Claude Code en Acción</h3>
-        <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Certificado que acredita el uso práctico de Claude Code como herramienta de desarrollo asistido por IA, incluyendo automatización de tareas, generación de código y flujos de trabajo productivos.</p>
-        <div class="flex flex-wrap gap-1.5 mb-4">
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">IA</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Claude Code</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Desarrollo</span>
+
+        <!-- UiPath primer -->
+        <div class="cert-card card-hover rounded-2xl border border-slate-800 bg-[#0d1117] p-6 flex flex-col flex-shrink-0">
+          <div class="text-3xl mb-4">⚡</div>
+          <div class="flex items-center gap-1.5 text-xs font-semibold text-blue-400 mb-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            UiPath Academy
+          </div>
+          <h3 class="font-semibold text-white mb-3 leading-snug">Crear tu Primera Automatización con UiPath</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Certificado que acredita el dominio de los fundamentos de RPA con UiPath, incluyendo diseño y ejecución de flujos automatizados.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">RPA</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">UiPath</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Automatización</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
+            <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completado · 2026
+          </div>
+          <button class="btn-cert" onclick="openPDF('Cree su primera automatización con UiPath.pdf','Crear tu Primera Automatización con UiPath — UiPath Academy')">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Ver Certificado
+          </button>
         </div>
-        <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
-          <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Completado · 2026
+
+        <!-- UiPath diploma -->
+        <div class="cert-card card-hover rounded-2xl border border-cyan-500/30 bg-[#0d1117] p-6 flex flex-col flex-shrink-0 relative" style="box-shadow: 0 0 30px rgba(6,182,212,0.06);">
+          <div class="absolute top-3 right-3">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">Diploma</span>
+          </div>
+          <div class="text-3xl mb-4">🎓</div>
+          <div class="flex items-center gap-1.5 text-xs font-semibold text-cyan-400 mb-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            UiPath Academy
+          </div>
+          <h3 class="font-semibold text-white mb-3 leading-snug">Explorar el Desarrollo de Automatización con UiPath</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Diploma avanzado en desarrollo de automatización con UiPath, cubriendo flujos de trabajo complejos, integraciones y mejores prácticas de RPA empresarial.</p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">RPA</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">UiPath</span>
+            <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Desarrollo Avanzado</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
+            <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completado · 2026
+          </div>
+          <button class="btn-cert" onclick="openPDF('Explorar el desarrollo de la automatización con UiPath_Alejandro López Brush_es-ES_diploma.pdf','Explorar el Desarrollo de Automatización con UiPath — Diploma')">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Ver Diploma
+          </button>
         </div>
-        <button class="btn-cert" onclick="openPDF('Claude Code en acción.pdf','Claude Code en Acción — Anthropic')">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Ver Certificado
-        </button>
+
       </div>
-
-      <!-- UiPath primer -->
-      <div class="card-hover rounded-2xl border border-slate-800 bg-[#0d1117] p-6 flex flex-col">
-        <div class="text-3xl mb-4">⚡</div>
-        <div class="flex items-center gap-1.5 text-xs font-semibold text-blue-400 mb-2">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          UiPath Academy
-        </div>
-        <h3 class="font-semibold text-white mb-3 leading-snug">Crear tu Primera Automatización con UiPath</h3>
-        <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Certificado que acredita el dominio de los fundamentos de RPA con UiPath, incluyendo diseño y ejecución de flujos automatizados.</p>
-        <div class="flex flex-wrap gap-1.5 mb-4">
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">RPA</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">UiPath</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Automatización</span>
-        </div>
-        <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
-          <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Completado · 2026
-        </div>
-        <button class="btn-cert" onclick="openPDF('Cree su primera automatización con UiPath.pdf','Crear tu Primera Automatización con UiPath — UiPath Academy')">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Ver Certificado
-        </button>
-      </div>
-
-      <!-- UiPath diploma -->
-      <div class="card-hover rounded-2xl border border-cyan-500/30 bg-[#0d1117] p-6 flex flex-col relative" style="box-shadow: 0 0 30px rgba(6,182,212,0.06);">
-        <div class="absolute top-3 right-3">
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">Diploma</span>
-        </div>
-        <div class="text-3xl mb-4">🎓</div>
-        <div class="flex items-center gap-1.5 text-xs font-semibold text-cyan-400 mb-2">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          UiPath Academy
-        </div>
-        <h3 class="font-semibold text-white mb-3 leading-snug">Explorar el Desarrollo de Automatización con UiPath</h3>
-        <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">Diploma avanzado en desarrollo de automatización con UiPath, cubriendo flujos de trabajo complejos, integraciones y mejores prácticas de RPA empresarial.</p>
-        <div class="flex flex-wrap gap-1.5 mb-4">
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">RPA</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">UiPath</span>
-          <span class="px-2 py-0.5 rounded-full border border-slate-700 text-slate-500 text-xs">Desarrollo Avanzado</span>
-        </div>
-        <div class="flex items-center gap-1.5 text-xs text-slate-500 pt-3 border-t border-slate-800 mb-3">
-          <svg class="w-3.5 h-3.5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Completado · 2026
-        </div>
-        <button class="btn-cert" onclick="openPDF('Explorar el desarrollo de la automatización con UiPath_Alejandro López Brush_es-ES_diploma.pdf','Explorar el Desarrollo de Automatización con UiPath — Diploma')">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Ver Diploma
-        </button>
-      </div>
-
     </div>
   </div>
 </section>
@@ -976,6 +1003,62 @@
   function handleImgModalClick(e) {
     if (e.target === document.getElementById('img-modal')) closeImage();
   }
+
+  // ── Carrusel de certificados ─────────────────────────
+  let certIndex = 0;
+
+  function certGetVisible() {
+    if (window.innerWidth < 640)  return 1;
+    if (window.innerWidth < 1024) return 2;
+    return 3;
+  }
+
+  function certInit() {
+    const cards  = document.querySelectorAll('.cert-card');
+    const total  = cards.length;
+    const vis    = certGetVisible();
+    const maxIdx = total - vis;
+    const dots   = document.getElementById('cert-dots');
+
+    // Crear dots
+    dots.innerHTML = '';
+    for (let i = 0; i <= maxIdx; i++) {
+      const d = document.createElement('button');
+      d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === certIndex ? 'bg-blue-400 w-4' : 'bg-slate-600');
+      d.onclick = () => { certIndex = i; certUpdate(); };
+      dots.appendChild(d);
+    }
+    certUpdate();
+  }
+
+  function certUpdate() {
+    const cards  = document.querySelectorAll('.cert-card');
+    const total  = cards.length;
+    const vis    = certGetVisible();
+    const maxIdx = total - vis;
+    certIndex    = Math.max(0, Math.min(certIndex, maxIdx));
+
+    const track    = document.getElementById('cert-track');
+    const cardW    = cards[0].offsetWidth + 24; // 24 = gap-6
+    track.style.transform = `translateX(-${certIndex * cardW}px)`;
+
+    // Dots
+    const dots = document.getElementById('cert-dots').children;
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === certIndex ? 'bg-blue-400' : 'bg-slate-600');
+    }
+
+    document.getElementById('cert-prev').disabled = certIndex === 0;
+    document.getElementById('cert-next').disabled = certIndex >= maxIdx;
+  }
+
+  function certSlide(dir) {
+    certIndex += dir;
+    certUpdate();
+  }
+
+  window.addEventListener('resize', certInit);
+  document.addEventListener('DOMContentLoaded', certInit);
 
   // ── PDF modal ────────────────────────────────────────
   const PDF_BASE = '/public/';
