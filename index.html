@@ -135,7 +135,7 @@
       transition: background 0.2s, color 0.2s;
     }
     #video-modal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
-    #video-modal video { width: 100%; display: block; max-height: 70vh; background:#000; }
+    #video-modal iframe { width: 100%; display: block; aspect-ratio: 16/9; border: 0; background:#000; }
     .btn-demo {
       display: inline-flex; align-items: center; gap: 6px;
       margin-top: 16px; padding: 8px 16px; border-radius: 10px;
@@ -924,7 +924,7 @@
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
-    <video id="video-player" controls playsinline></video>
+    <iframe id="video-player" allowfullscreen allow="autoplay"></iframe>
   </div>
 </div>
 
@@ -1091,25 +1091,27 @@
   });
 
   // ── Video modal ───────────────────────────────────────
-  const VIDEO_BASE = '../../Portafolio/';
+  const DRIVE_VIDEOS = {
+    'Análisis financiero con Claude Code.mp4':                          '1CMAUDs3yxY0FKhmESsyFTIyi-nST4u8G',
+    'Análisis financiero con Claude en excel.mp4':                      '1fPAa28Gp7km7hh8a16eAkO1519C39Zef',
+    'Automatización de analisis de reporte financiero con n8n.mp4':     '1dWAyo_CUanqpre4u3H1v5LcTez1pHgyY',
+    'Automatización de resumen financiero con UiPath y Claude.mp4':     '1uAf--D_BBPToQasSTZQQYDe81v61x2jc',
+    'Explorar la valoracion de una accion con UiPath.mp4':              '15nf6FJ6wpYXoOFQO2tKCVEJrM_TpMfhy',
+  };
 
   function openVideo(filename, title) {
     const player = document.getElementById('video-player');
     const modal  = document.getElementById('video-modal');
-    // Encode only the filename to handle spaces and accented characters
-    const parts = filename.split('/');
-    const encoded = parts.map(p => encodeURIComponent(p)).join('/');
-    player.src = VIDEO_BASE + encoded;
+    const id = DRIVE_VIDEOS[filename];
+    player.src = id ? `https://drive.google.com/file/d/${id}/preview` : '';
     document.getElementById('video-modal-title').textContent = title;
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    player.load();
   }
 
   function closeVideo() {
     const player = document.getElementById('video-player');
     const modal  = document.getElementById('video-modal');
-    player.pause();
     player.src = '';
     modal.classList.remove('open');
     document.body.style.overflow = '';
