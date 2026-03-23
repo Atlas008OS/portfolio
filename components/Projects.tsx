@@ -7,6 +7,7 @@ import {
   FileSpreadsheet,
   Layers,
   ExternalLink,
+  Play,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -204,14 +205,22 @@ export default function Projects() {
                 className="border-border bg-card/50 backdrop-blur-sm card-hover flex flex-col"
               >
                 {project.videoUrl && (
-                  <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-                    <iframe
-                      src={project.videoUrl}
-                      className="absolute inset-0 w-full h-full rounded-t-xl"
-                      allow="autoplay"
-                      allowFullScreen
-                    />
-                  </div>
+                  <a
+                    href={project.videoUrl.replace("/preview", "/view")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative flex items-center justify-center w-full rounded-t-xl overflow-hidden ${colors.bg} border-b border-border group`}
+                    style={{ paddingTop: "56.25%" }}
+                  >
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                      <div className={`p-4 rounded-full bg-black/40 border ${colors.border} group-hover:scale-110 transition-transform duration-200`}>
+                        <Play className={`w-8 h-8 ${colors.text} fill-current`} />
+                      </div>
+                      <span className="text-xs text-white/70 group-hover:text-white transition-colors">
+                        Ver video en Drive
+                      </span>
+                    </div>
+                  </a>
                 )}
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between gap-3 mb-3">
