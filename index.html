@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KAIROS – Consultoría de IA y Automatización · Ecuador</title>
   <meta name="description" content="Automatización e Inteligencia Artificial a medida para PyMEs en Ecuador. Diagnóstico desde $300. Sin soluciones genéricas."/>
-  <link rel="icon" href="Documentos/Kairos 3.0.png" type="image/png" />
+  <link rel="icon" href="public/kairos-logo.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -269,7 +269,7 @@
 
       <!-- Logo — izquierda -->
       <a href="#hero" class="flex items-center gap-3 flex-shrink-0">
-        <img src="Documentos/Kairos 3.0.png" alt="KAIROS" class="h-10 w-10 object-contain flex-shrink-0" style="mix-blend-mode: screen; filter: brightness(1.15) contrast(1.05);" />
+        <img src="public/kairos-logo.png" alt="KAIROS" class="h-10 w-10 object-contain flex-shrink-0" style="mix-blend-mode: screen; filter: brightness(1.15) contrast(1.05);" />
         <span class="text-xl font-black tracking-widest gradient-text">KAIROS</span>
       </a>
 
@@ -515,10 +515,23 @@
                   style="color:rgba(0,212,255,0.85);">Caso destacado</span>
           </div>
 
-          <!-- Imagen a full width, sin recorte -->
-          <img src="Documentos/Imagen exito.jpeg"
-               alt="Caso de éxito: Cake Art transformado con KAIROS IA"
-               class="w-full h-auto block" />
+          <!-- Imagen encuadrada profesionalmente -->
+          <div class="relative w-full overflow-hidden" style="aspect-ratio:16/9;">
+            <img src="public/imagen-exito.jpeg"
+                 alt="Caso de éxito: Cake Art transformado con KAIROS IA"
+                 class="w-full h-full object-cover object-center"
+                 style="display:block;" />
+            <!-- Degradado sutil en bordes inferior e izquierdo para integración con la tarjeta -->
+            <div class="absolute inset-0 pointer-events-none"
+                 style="background: linear-gradient(to top, rgba(8,8,16,0.55) 0%, transparent 38%),
+                                    linear-gradient(to right, rgba(8,8,16,0.18) 0%, transparent 30%);"></div>
+            <!-- Badge flotante -->
+            <div class="absolute bottom-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
+                 style="background:rgba(8,8,16,0.72); border:1px solid rgba(0,212,255,0.3); color:#00d4ff; backdrop-filter:blur(8px);">
+              <span style="width:6px;height:6px;background:#00d4ff;border-radius:50%;box-shadow:0 0 6px rgba(0,212,255,0.9);display:inline-block;"></span>
+              Resultado real · Cake Art
+            </div>
+          </div>
 
           <!-- Barra inferior con CTA sutil -->
           <div class="flex items-center justify-between px-6 py-4"
@@ -1104,7 +1117,7 @@
         <!-- Brand -->
         <div>
           <div class="flex items-center gap-3 mb-4">
-            <img src="Documentos/Kairos 3.0.png" alt="KAIROS" class="h-12 w-12 object-contain flex-shrink-0" style="mix-blend-mode: screen; filter: brightness(1.15) contrast(1.05);" />
+            <img src="public/kairos-logo.png" alt="KAIROS" class="h-12 w-12 object-contain flex-shrink-0" style="mix-blend-mode: screen; filter: brightness(1.15) contrast(1.05);" />
             <div>
               <div class="font-black text-xl tracking-wider gradient-text">KAIROS</div>
               <div class="text-slate-600 text-xs">Consultoría de IA &amp; Automatización · Ecuador</div>
